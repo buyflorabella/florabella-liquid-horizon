@@ -30,7 +30,7 @@
         {%- if section.settings.logo != blank -%}
           {{ section.settings.logo | image_url: width: 300 | image_tag: loading: 'eager', alt: shop.name, class: 'bfbella-header__logo-img' }}
         {%- else -%}
-          <span class="bfbella-header__logo-text">{{ shop.name }}</span>
+          {{ 'bfbella-logo.png' | asset_url | image_tag: loading: 'eager', alt: shop.name, class: 'bfbella-header__logo-img', width: 300 }}
         {%- endif -%}
       </a>
     </div>
@@ -72,7 +72,7 @@
       {%- if section.settings.logo != blank -%}
         {{ section.settings.logo | image_url: width: 200 | image_tag: loading: 'eager', alt: shop.name, class: 'bfbella-mobile-menu__logo' }}
       {%- else -%}
-        <span class="bfbella-header__logo-text">{{ shop.name }}</span>
+        {{ 'bfbella-logo.png' | asset_url | image_tag: loading: 'eager', alt: shop.name, class: 'bfbella-mobile-menu__logo', width: 200 }}
       {%- endif -%}
       <button class="bfbella-mobile-menu__close" id="bfbella-mobile-close-{{ section.id }}" aria-label="Close menu">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -141,12 +141,12 @@
     display: inline-flex;
   }
   .bfbella-header__logo-img {
-    height: 5rem;
+    height: 6rem;
     width: auto;
     transition: height 0.3s ease;
   }
   .bfbella-header--scrolled .bfbella-header__logo-img {
-    height: 3.5rem;
+    height: 4rem;
   }
   .bfbella-header__logo-text {
     color: rgb(var(--color-foreground-rgb));
