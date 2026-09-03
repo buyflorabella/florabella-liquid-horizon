@@ -1,0 +1,355 @@
+{%- liquid
+  assign cart_count = cart.item_count
+-%}
+
+<header class="bfbella-header" id="bfbella-header-{{ section.id }}" role="banner" style="--bfbella-header-accent: {{ settings.color_palette.color1 }};">
+  <div class="bfbella-header__inner">
+    <div class="bfbella-header__left">
+      <button
+        class="bfbella-header__icon-btn bfbella-header__icon-btn--accent bfbella-header__menu-toggle"
+        id="bfbella-mobile-menu-toggle-{{ section.id }}"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="bfbella-mobile-menu-{{ section.id }}"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <button
+        class="bfbella-header__icon-btn bfbella-header__icon-btn--accent"
+        id="bfbella-search-toggle-{{ section.id }}"
+        aria-label="Toggle search"
+        aria-expanded="false"
+        aria-controls="bfbella-search-bar-{{ section.id }}"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+    </div>
+
+    <div class="bfbella-header__logo">
+      <a href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
+        {%- if section.settings.logo != blank -%}
+          {{ section.settings.logo | image_url: width: 300 | image_tag: loading: 'eager', alt: shop.name, class: 'bfbella-header__logo-img' }}
+        {%- else -%}
+          <span class="bfbella-header__logo-text">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+    </div>
+
+    <div class="bfbella-header__right">
+      <nav class="bfbella-header__nav" aria-label="Main navigation">
+        {%- for link in section.settings.menu.links -%}
+          <a href="{{ link.url }}" class="bfbella-header__nav-link">{{ link.title }}</a>
+        {%- endfor -%}
+      </nav>
+
+      <a href="{{ routes.account_url }}" class="bfbella-header__icon-btn" aria-label="Account">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </a>
+
+      <a href="{{ routes.cart_url }}" class="bfbella-header__icon-btn bfbella-header__cart" aria-label="Cart ({{ cart_count }} items)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        {%- if cart_count > 0 -%}
+          <span class="bfbella-header__cart-count" aria-hidden="true">{{ cart_count }}</span>
+        {%- endif -%}
+      </a>
+    </div>
+  </div>
+
+  <div class="bfbella-header__search-bar" id="bfbella-search-bar-{{ section.id }}" hidden>
+    <div class="bfbella-header__search-inner">
+      <form action="{{ routes.search_url }}" method="get" role="search">
+        <input type="search" name="q" placeholder="Search products, articles..." aria-label="Search" autocomplete="off">
+        <input type="hidden" name="type" value="product,article">
+      </form>
+    </div>
+  </div>
+</header>
+
+<div class="bfbella-mobile-menu" id="bfbella-mobile-menu-{{ section.id }}" aria-hidden="true" role="dialog" aria-label="Navigation">
+  <div class="bfbella-mobile-menu__overlay" id="bfbella-mobile-overlay-{{ section.id }}"></div>
+  <div class="bfbella-mobile-menu__panel">
+    <div class="bfbella-mobile-menu__header">
+      {%- if section.settings.logo != blank -%}
+        {{ section.settings.logo | image_url: width: 200 | image_tag: loading: 'eager', alt: shop.name, class: 'bfbella-mobile-menu__logo' }}
+      {%- else -%}
+        <span class="bfbella-header__logo-text">{{ shop.name }}</span>
+      {%- endif -%}
+      <button class="bfbella-mobile-menu__close" id="bfbella-mobile-close-{{ section.id }}" aria-label="Close menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <nav class="bfbella-mobile-menu__nav" aria-label="Mobile navigation">
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {%- endfor -%}
+      <a href="{{ routes.account_url }}">Account</a>
+      <a href="{{ routes.cart_url }}">Cart ({{ cart_count }})</a>
+    </nav>
+  </div>
+</div>
+
+<style>
+  .bfbella-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(var(--color-background-rgb), 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background 0.3s ease;
+  }
+  .bfbella-header--scrolled {
+    background: rgba(var(--color-background-rgb), 0.85);
+  }
+  .bfbella-header__inner {
+    max-width: 120rem;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .bfbella-header__left,
+  .bfbella-header__right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .bfbella-header__icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    color: rgb(var(--color-foreground-rgb));
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.3s ease;
+    position: relative;
+  }
+  .bfbella-header__icon-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+  }
+  .bfbella-header__icon-btn--accent {
+    color: var(--bfbella-header-accent);
+  }
+  .bfbella-header__menu-toggle {
+    display: inline-flex;
+  }
+  .bfbella-header__logo-img {
+    height: 5rem;
+    width: auto;
+    transition: height 0.3s ease;
+  }
+  .bfbella-header--scrolled .bfbella-header__logo-img {
+    height: 3.5rem;
+  }
+  .bfbella-header__logo-text {
+    color: rgb(var(--color-foreground-rgb));
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+  .bfbella-header__nav {
+    display: none;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .bfbella-header__nav-link {
+    color: rgb(var(--color-foreground-rgb));
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  .bfbella-header__nav-link:hover {
+    color: var(--bfbella-header-accent);
+    transform: translateY(-2px);
+  }
+  .bfbella-header__cart-count {
+    position: absolute;
+    top: -0.25rem;
+    right: -0.25rem;
+    background: var(--bfbella-header-accent);
+    color: #ffffff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    border-radius: 999px;
+    width: 1.25rem;
+    height: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .bfbella-header__search-bar {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.9);
+  }
+  .bfbella-header__search-inner {
+    max-width: 120rem;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+  }
+  .bfbella-header__search-bar input[type='search'] {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.75rem;
+    color: rgb(var(--color-foreground-rgb));
+  }
+  .bfbella-mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: none;
+  }
+  .bfbella-mobile-menu--open {
+    display: block;
+  }
+  .bfbella-mobile-menu__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+  }
+  .bfbella-mobile-menu__panel {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, var(--bfbella-overlay-start) 0%, var(--bfbella-overlay-end) 100%);
+    overflow-y: auto;
+  }
+  .bfbella-mobile-menu__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .bfbella-mobile-menu__logo {
+    height: 4rem;
+    width: auto;
+  }
+  .bfbella-mobile-menu__close {
+    background: none;
+    border: none;
+    color: rgb(var(--color-foreground-rgb));
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+  .bfbella-mobile-menu__nav {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 0.5rem;
+  }
+  .bfbella-mobile-menu__nav a {
+    color: rgb(var(--color-foreground-rgb));
+    text-decoration: none;
+    font-size: 1.125rem;
+    font-weight: 500;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    transition: background 0.3s ease;
+  }
+  .bfbella-mobile-menu__nav a:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  @media screen and (min-width: 750px) {
+    .bfbella-header__menu-toggle {
+      display: none;
+    }
+    .bfbella-header__nav {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    var sectionId = {{ section.id | json }};
+    var header = document.getElementById('bfbella-header-' + sectionId);
+    var mobileMenu = document.getElementById('bfbella-mobile-menu-' + sectionId);
+    var mobileToggle = document.getElementById('bfbella-mobile-menu-toggle-' + sectionId);
+    var mobileClose = document.getElementById('bfbella-mobile-close-' + sectionId);
+    var overlay = document.getElementById('bfbella-mobile-overlay-' + sectionId);
+    var searchToggle = document.getElementById('bfbella-search-toggle-' + sectionId);
+    var searchBar = document.getElementById('bfbella-search-bar-' + sectionId);
+
+    if (!header) return;
+
+    window.addEventListener(
+      'scroll',
+      function () {
+        header.classList.toggle('bfbella-header--scrolled', window.scrollY > 80);
+      },
+      { passive: true }
+    );
+
+    function openMenu() {
+      mobileMenu.classList.add('bfbella-mobile-menu--open');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      mobileMenu.classList.remove('bfbella-mobile-menu--open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    mobileToggle.addEventListener('click', openMenu);
+    mobileClose.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+
+    searchToggle.addEventListener('click', function () {
+      if (searchBar.hasAttribute('hidden')) {
+        searchBar.removeAttribute('hidden');
+        searchToggle.setAttribute('aria-expanded', 'true');
+        searchBar.querySelector('input').focus();
+      } else {
+        searchBar.setAttribute('hidden', '');
+        searchToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeMenu();
+        searchBar.setAttribute('hidden', '');
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "BFBella — Header",
+  "class": "section-header",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "Navigation menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BFBella — Header"
+    }
+  ]
+}
+{% endschema %}
