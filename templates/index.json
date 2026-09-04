@@ -33,6 +33,279 @@
         "columns_desktop": 3
       }
     },
+    "testimonials": {
+      "type": "section",
+      "name": "t:names.section",
+      "blocks": {
+        "testimonials_heading": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Gardeners Are Seeing Real Change</p><p>Real results from real growers</p>",
+            "text_color": "{{ settings.color_palette.foreground }}",
+            "width": "fill",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "h1",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "testimonials_row": {
+          "type": "group",
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 24,
+            "width": "fill",
+            "height": "fit",
+            "background_media": "none",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "testimonial_group_1": {
+              "type": "group",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "flex-start",
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 12,
+                "width": "fill",
+                "height": "fit",
+                "background_media": "none",
+                "background_color": "{{ settings.color_palette.foreground }}08",
+                "border": "solid",
+                "border_width": 1,
+                "border_opacity": 10,
+                "border_radius": 16,
+                "padding-block-start": 24,
+                "padding-block-end": 24,
+                "padding-inline-start": 24,
+                "padding-inline-end": 24
+              },
+              "blocks": {
+                "t1_name": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>\u2605\u2605\u2605\u2605\u2605<br>Michael M. \u2014 Larue, MS</p>",
+                    "text_color": "{{ settings.color_palette.color1 }}",
+                    "width": "fill",
+                    "type_preset": "h6",
+                    "font": "var(--font-body--family)",
+                    "wrap": "pretty",
+                    "background": false,
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "t1_quote": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>\"I have been on farms and in gardens for 40 years. I used Flora Bella on my farm and noticed an immediate difference in the vigor of all my plants, especially the palms.... I am amazed with the quality and performance of the Flora Bella product.\"</p>",
+                    "text_color": "{{ settings.color_palette.foreground }}",
+                    "width": "fill",
+                    "type_preset": "paragraph",
+                    "font": "var(--font-body--family)",
+                    "wrap": "pretty",
+                    "background": false,
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "t1_name",
+                "t1_quote"
+              ]
+            },
+            "testimonial_group_2": {
+              "type": "group",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "flex-start",
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 12,
+                "width": "fill",
+                "height": "fit",
+                "background_media": "none",
+                "background_color": "{{ settings.color_palette.foreground }}08",
+                "border": "solid",
+                "border_width": 1,
+                "border_opacity": 10,
+                "border_radius": 16,
+                "padding-block-start": 24,
+                "padding-block-end": 24,
+                "padding-inline-start": 24,
+                "padding-inline-end": 24
+              },
+              "blocks": {
+                "t2_name": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>\u2605\u2605\u2605\u2605\u2605<br>Shannon L. \u2014 Tampa, FL</p>",
+                    "text_color": "{{ settings.color_palette.color1 }}",
+                    "width": "fill",
+                    "type_preset": "h6",
+                    "font": "var(--font-body--family)",
+                    "wrap": "pretty",
+                    "background": false,
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "t2_quote": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>\"What surprised me most was how quickly I noticed new growth. The plants responded faster than I expected... with visible vitality early on!\"</p>",
+                    "text_color": "{{ settings.color_palette.foreground }}",
+                    "width": "fill",
+                    "type_preset": "paragraph",
+                    "font": "var(--font-body--family)",
+                    "wrap": "pretty",
+                    "background": false,
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "t2_name",
+                "t2_quote"
+              ]
+            },
+            "testimonial_group_3": {
+              "type": "group",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "flex-start",
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 12,
+                "width": "fill",
+                "height": "fit",
+                "background_media": "none",
+                "background_color": "{{ settings.color_palette.foreground }}08",
+                "border": "solid",
+                "border_width": 1,
+                "border_opacity": 10,
+                "border_radius": 16,
+                "padding-block-start": 24,
+                "padding-block-end": 24,
+                "padding-inline-start": 24,
+                "padding-inline-end": 24
+              },
+              "blocks": {
+                "t3_name": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>\u2605\u2605\u2605\u2605\u2605<br>Jacob C.</p>",
+                    "text_color": "{{ settings.color_palette.color1 }}",
+                    "width": "fill",
+                    "type_preset": "h6",
+                    "font": "var(--font-body--family)",
+                    "wrap": "pretty",
+                    "background": false,
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "t3_quote": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>\"I can't speak highly of it enough. Stuff made our plants explode! We had a pretty balanced recipe, but it helped give the plants a slower release version of the micronutrients a lot of growers struggle finding the right balance for. I'd say it benefits smaller craft growers the most but it boosted the gardens we ran, and that was 42 acres....\"</p>",
+                    "text_color": "{{ settings.color_palette.foreground }}",
+                    "width": "fill",
+                    "type_preset": "paragraph",
+                    "font": "var(--font-body--family)",
+                    "wrap": "pretty",
+                    "background": false,
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "t3_name",
+                "t3_quote"
+              ]
+            }
+          },
+          "block_order": [
+            "testimonial_group_1",
+            "testimonial_group_2",
+            "testimonial_group_3"
+          ]
+        }
+      },
+      "block_order": [
+        "testimonials_heading",
+        "testimonials_row"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "center",
+        "vertical_alignment": "center",
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 32,
+        "section_width": "page-width",
+        "background_media": "none",
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 64,
+        "padding-block-end": 64
+      }
+    },
     "product_list_fa6P9H": {
       "type": "product-list",
       "blocks": {
@@ -223,6 +496,7 @@
   "order": [
     "hero_jVaWmY",
     "bfbella_shop",
+    "testimonials",
     "product_list_fa6P9H"
   ]
 }
