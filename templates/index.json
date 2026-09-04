@@ -9,7 +9,7 @@
  */{
   "sections": {
     "hero_jVaWmY": {
-      "type": "hero",
+      "type": "bfbella-hero",
       "blocks": {
         "text_YLPk4p": {
           "type": "text",
