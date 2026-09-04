@@ -764,6 +764,35 @@
   }
 {% endstylesheet %}
 
+{% comment %}
+  BFBella layout: production's hero is a real two-column split (text left,
+  product photo right), not an overlay-on-background-image hero like
+  native. Scoped to this instance's own #Hero-{{ section.id }} ID so it
+  can't affect any other hero section in the theme.
+{% endcomment %}
+<style>
+  @media screen and (min-width: 990px) {
+    #Hero-{{ section.id }} .hero__container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 3rem;
+      min-height: auto;
+    }
+    #Hero-{{ section.id }} .hero__media-grid {
+      position: static;
+      grid-column: 2;
+      aspect-ratio: 4 / 5;
+      border-radius: 1.5rem;
+      overflow: hidden;
+    }
+    #Hero-{{ section.id }} .hero__content-wrapper {
+      position: static;
+      grid-column: 1;
+    }
+  }
+</style>
+
 {% schema %}
 {
   "name": "BFBella — Hero",
