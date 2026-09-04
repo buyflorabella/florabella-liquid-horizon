@@ -317,6 +317,22 @@
     #BfbellaHero-{{ section.id }} .bfbella-hero__media {
       grid-column: 2;
       grid-row: 1;
+      animation: bfbellaHeroParallaxFloat 5s ease-in-out infinite;
+    }
+  }
+
+  @keyframes bfbellaHeroParallaxFloat {
+    0%, 100% {
+      transform: translateY(0) scale(1);
+    }
+    50% {
+      transform: translateY(-1.5rem) scale(1.05);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #BfbellaHero-{{ section.id }} .bfbella-hero__media {
+      animation: none;
     }
   }
 
@@ -338,6 +354,11 @@
     border-radius: 1.5rem;
     box-shadow: 0 25px 50px -12px {{ settings.color_palette.background }}40;
     display: block;
+    transition: transform 0.7s ease;
+  }
+
+  #BfbellaHero-{{ section.id }} .bfbella-hero__media:hover .bfbella-hero__image {
+    transform: scale(1.05);
   }
 
   #BfbellaHero-{{ section.id }} .bfbella-hero__image-placeholder svg {
