@@ -55,9 +55,12 @@
                 {%- endif -%}
               </div>
 
-              {%- assign current_variant = product.selected_or_first_available_variant -%}
+              {%- liquid
+                assign current_variant = product.selected_or_first_available_variant
+                assign shop_form_id = 'BfbellaShopForm-' | append: product.id
+              -%}
               <div class="bfbella-shop__form">
-                {%- form 'product', product, id: 'BfbellaShopForm-' | append: product.id, class: 'bfbella-shop__form-inner' -%}
+                {%- form 'product', product, id: shop_form_id, class: 'bfbella-shop__form-inner' -%}
                   <input type="hidden" name="id" value="{{ current_variant.id }}" {% unless current_variant.available %}disabled{% endunless %}>
                   <button
                     type="submit"
