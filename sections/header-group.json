@@ -41,7 +41,7 @@
       }
     },
     "header_section": {
-      "type": "header",
+      "type": "bfbella-header",
       "blocks": {
         "header-logo": {
           "type": "_header-logo",
