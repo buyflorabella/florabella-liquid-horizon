@@ -4,10 +4,17 @@
   earlier copy-modify-native-image-banner approach for this section only).
   Structure and CSS ported from the live Hydrogen reference
   (buyflorabella_restore/dev/frontend/app/componentsMockup2/components/
-  HeroSection.tsx + index.css), adapted to Liquid/native Shopify color
-  settings per CLAUDE.md (colors must be Shopify color settings, not
-  hardcoded hex; media must be Shopify Files via image_picker, never a
-  repo asset).
+  HeroSection.tsx + index.css).
+
+  Colors (DXB, 2026-09-04: "use the standard shopify color selectors, no
+  custom CSS for colors" / "zero custom colors") reference the theme's one
+  global settings.color_palette directly -- Horizon has no per-section
+  color_scheme concept the way Dawn does (confirmed: no color_scheme_group
+  anywhere in config/settings_schema.json, only the single global
+  color_palette), so this section's colors follow the rest of the theme's
+  dark palette rather than the light cream Dawn's hero uses -- Dawn can
+  give one section its own standard-but-distinct scheme, Horizon's model
+  can't without introducing a genuinely custom, non-standard color.
 {% endcomment %}
 
 <section class="bfbella-hero" id="BfbellaHero-{{ section.id }}">
@@ -96,7 +103,7 @@
   #BfbellaHero-{{ section.id }} {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(180deg, {{ section.settings.bg_gradient_start }} 0%, {{ section.settings.bg_gradient_end }} 100%);
+    background: {{ settings.color_palette.background }};
     padding: 4rem 0;
   }
 
@@ -119,7 +126,7 @@
     left: 5%;
     width: 26rem;
     height: 26rem;
-    background: {{ section.settings.accent_color }};
+    background: {{ settings.color_palette.color1 }};
   }
 
   #BfbellaHero-{{ section.id }} .bfbella-hero__blob--2 {
@@ -127,7 +134,7 @@
     right: 5%;
     width: 32rem;
     height: 32rem;
-    background: {{ section.settings.accent_earth_color }};
+    background: {{ settings.color_palette.color2 }};
   }
 
   #BfbellaHero-{{ section.id }} .bfbella-hero__inner {
@@ -156,8 +163,8 @@
 
   #BfbellaHero-{{ section.id }} .bfbella-hero__eyebrow {
     display: inline-block;
-    background: {{ section.settings.accent_color }}1a;
-    border: 1px solid {{ section.settings.accent_color }}4d;
+    background: {{ settings.color_palette.color1 }}1a;
+    border: 1px solid {{ settings.color_palette.color1 }}4d;
     padding: 0.5rem;
     border-radius: 999px;
     margin-bottom: 1.5rem;
@@ -169,18 +176,18 @@
     gap: 0.5rem;
     padding: 0.9rem 2rem;
     border-radius: 999px;
-    background: linear-gradient(135deg, {{ section.settings.accent_color }} 0%, {{ section.settings.accent_dark_color }} 100%);
-    color: #ffffff;
+    background: {{ settings.color_palette.color1 }};
+    color: {{ settings.color_palette.background }};
     font-weight: 700;
     font-size: 1.4rem;
     text-decoration: none;
-    box-shadow: 0 10px 25px -5px {{ section.settings.accent_color }}66;
+    box-shadow: 0 10px 25px -5px {{ settings.color_palette.color1 }}66;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   #BfbellaHero-{{ section.id }} .bfbella-hero__pill:hover {
     transform: scale(1.08);
-    box-shadow: 0 20px 35px -5px {{ section.settings.accent_color }}80;
+    box-shadow: 0 20px 35px -5px {{ settings.color_palette.color1 }}80;
   }
 
   #BfbellaHero-{{ section.id }} .bfbella-hero__heading {
@@ -189,7 +196,7 @@
     letter-spacing: -0.03em;
     line-height: 0.95;
     font-size: 4.4rem;
-    color: {{ section.settings.heading_color }};
+    color: {{ settings.color_palette.foreground }};
     margin: 0 0 1.5rem;
   }
 
@@ -209,21 +216,21 @@
     font-size: 2rem;
     font-weight: 500;
     line-height: 1.4;
-    color: {{ section.settings.body_color }};
+    color: {{ settings.color_palette.foreground }}d9;
     margin: 0 0 1.5rem;
   }
 
   #BfbellaHero-{{ section.id }} .bfbella-hero__body {
     font-size: 1.6rem;
     line-height: 1.6;
-    color: {{ section.settings.body_color }};
+    color: {{ settings.color_palette.foreground }}d9;
     max-width: 55rem;
     margin: 0 0 1.5rem;
   }
 
   #BfbellaHero-{{ section.id }} .bfbella-hero__callout {
-    background: {{ section.settings.accent_color }}0d;
-    border: 1px solid {{ section.settings.accent_color }}33;
+    background: {{ settings.color_palette.color1 }}0d;
+    border: 1px solid {{ settings.color_palette.color1 }}33;
     border-radius: 1.5rem;
     padding: 1.5rem;
     margin: 0 0 2.5rem;
@@ -233,7 +240,7 @@
   #BfbellaHero-{{ section.id }} .bfbella-hero__callout p {
     font-size: 1.3rem;
     line-height: 1.6;
-    color: {{ section.settings.body_color }};
+    color: {{ settings.color_palette.foreground }}d9;
     margin: 0;
   }
 
@@ -257,25 +264,25 @@
   }
 
   #BfbellaHero-{{ section.id }} .bfbella-hero__button--primary {
-    background: linear-gradient(135deg, {{ section.settings.accent_color }} 0%, {{ section.settings.accent_dark_color }} 100%);
-    color: #ffffff;
-    box-shadow: 0 10px 25px -5px {{ section.settings.accent_color }}66;
+    background: {{ settings.color_palette.color1 }};
+    color: {{ settings.color_palette.background }};
+    box-shadow: 0 10px 25px -5px {{ settings.color_palette.color1 }}66;
   }
 
   #BfbellaHero-{{ section.id }} .bfbella-hero__button--primary:hover {
     transform: scale(1.08);
-    box-shadow: 0 20px 35px -5px {{ section.settings.accent_color }}80;
+    box-shadow: 0 20px 35px -5px {{ settings.color_palette.color1 }}80;
   }
 
   #BfbellaHero-{{ section.id }} .bfbella-hero__button--secondary {
-    background: {{ section.settings.button_secondary_bg }};
-    border: 1px solid {{ section.settings.button_secondary_border }};
-    color: {{ section.settings.heading_color }};
+    background: transparent;
+    border: 1px solid {{ settings.color_palette.foreground }}4d;
+    color: {{ settings.color_palette.foreground }};
   }
 
   #BfbellaHero-{{ section.id }} .bfbella-hero__button--secondary:hover {
     transform: scale(1.05);
-    border-color: {{ section.settings.accent_color }}80;
+    border-color: {{ settings.color_palette.color1 }};
   }
 
   #BfbellaHero-{{ section.id }} .bfbella-hero__checkmarks {
@@ -292,11 +299,11 @@
     align-items: center;
     gap: 0.8rem;
     font-size: 1.4rem;
-    color: {{ section.settings.body_color }};
+    color: {{ settings.color_palette.foreground }}d9;
   }
 
   #BfbellaHero-{{ section.id }} .bfbella-hero__checkmarks svg {
-    color: {{ section.settings.accent_color }};
+    color: {{ settings.color_palette.color1 }};
     flex-shrink: 0;
   }
 
@@ -316,7 +323,7 @@
   #BfbellaHero-{{ section.id }} .bfbella-hero__media-glow {
     position: absolute;
     inset: -1.5rem;
-    background: linear-gradient(135deg, {{ section.settings.accent_color }}33, {{ section.settings.accent_earth_color }}33);
+    background: {{ settings.color_palette.color1 }}33;
     border-radius: 2.5rem;
     filter: blur(30px);
     z-index: 0;
@@ -329,7 +336,7 @@
     width: 100%;
     height: auto;
     border-radius: 1.5rem;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 25px 50px -12px {{ settings.color_palette.background }}40;
     display: block;
   }
 
@@ -430,62 +437,8 @@
       "label": "Product photo"
     },
     {
-      "type": "header",
-      "content": "Colors"
-    },
-    {
-      "type": "color",
-      "id": "bg_gradient_start",
-      "default": "#fafaf9",
-      "label": "Background gradient start"
-    },
-    {
-      "type": "color",
-      "id": "bg_gradient_end",
-      "default": "#f0f0ee",
-      "label": "Background gradient end"
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "default": "#111827",
-      "label": "Heading color"
-    },
-    {
-      "type": "color",
-      "id": "body_color",
-      "default": "#374151",
-      "label": "Body text color"
-    },
-    {
-      "type": "color",
-      "id": "accent_color",
-      "default": "#7cb342",
-      "label": "Accent color"
-    },
-    {
-      "type": "color",
-      "id": "accent_dark_color",
-      "default": "#558b2f",
-      "label": "Accent color (gradient end)"
-    },
-    {
-      "type": "color",
-      "id": "accent_earth_color",
-      "default": "#8b6f47",
-      "label": "Secondary accent (earth tone)"
-    },
-    {
-      "type": "color",
-      "id": "button_secondary_bg",
-      "default": "#ffffff",
-      "label": "Secondary button background"
-    },
-    {
-      "type": "color",
-      "id": "button_secondary_border",
-      "default": "#e5e7eb",
-      "label": "Secondary button border"
+      "type": "paragraph",
+      "content": "Colors follow the theme's global color palette (Theme Settings → Colors) — Horizon has no per-section scheme picker, so there are no color settings here to keep this zero-custom."
     }
   ],
   "presets": [
