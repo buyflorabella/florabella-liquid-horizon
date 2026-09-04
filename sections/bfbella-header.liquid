@@ -1248,16 +1248,32 @@
   Pass-1 look restored 2026-09-04, this time as an addition to the native
   copy rather than a from-scratch rebuild -- see CLAUDE.md Shopify-Native
   Standards for why this is scoped as narrowly as it is.
+
+  2026-09-04: color_palette now matches production -- light page
+  (background), dark text (foreground). The header is a deliberately dark
+  floating island on top of that light page (same as production's own
+  header), so it can't just inherit the page's colors directly: its own
+  background reads from the global --color-foreground-rgb (dark), and
+  everything inside it has --color-foreground-rgb locally overridden to
+  the light --color-background-rgb value so nav text/icons stay readable
+  against the dark bar instead of going dark-on-dark. Both values are
+  still 100% native color_palette fields -- just deliberately swapped for
+  this one floating element, the same way production's own header keeps a
+  fixed dark treatment independent of the page around it.
 {% endcomment %}
 {% style %}
   #header-component {
-    background: rgba(var(--color-background-rgb), 0.75);
+    background: rgba(var(--color-foreground-rgb), 0.75);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     transition: background 0.3s ease;
   }
   #header-component[data-sticky-state='active'] {
-    background: rgba(var(--color-background-rgb), 0.85);
+    background: rgba(var(--color-foreground-rgb), 0.85);
+  }
+  #header-component :where(*) {
+    --color-foreground-rgb: var(--color-background-rgb);
+    --color-foreground: var(--color-background);
   }
   .menu-list__link {
     transition: color 0.3s ease, transform 0.3s ease;
@@ -1275,7 +1291,7 @@
   */
   .header-actions__action:hover,
   .header__icon--menu:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(var(--color-background-rgb), 0.15);
     border-radius: 8px;
     transform: scale(1.1);
     transition: background 0.3s ease, transform 0.3s ease;
