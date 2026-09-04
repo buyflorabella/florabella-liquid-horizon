@@ -24,6 +24,15 @@
         "button_link_2": "/pages/community"
       }
     },
+    "bfbella_shop": {
+      "type": "bfbella-shop",
+      "settings": {
+        "heading": "Shop our products",
+        "collection": "all",
+        "products_to_show": 6,
+        "columns_desktop": 3
+      }
+    },
     "product_list_fa6P9H": {
       "type": "product-list",
       "blocks": {
@@ -213,6 +222,7 @@
   },
   "order": [
     "hero_jVaWmY",
+    "bfbella_shop",
     "product_list_fa6P9H"
   ]
 }

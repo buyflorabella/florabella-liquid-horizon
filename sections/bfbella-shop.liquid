@@ -1,0 +1,304 @@
+{% comment %}
+  BFBella — Shop. Fully custom section (DXB, 2026-09-04 task4: "implement task4
+  as 'shop in homepage'... create a custom layer for us" — same pattern as the
+  hero: fully custom, not a native-section copy-modify, and additive only, no
+  native section touched or modified).
+
+  Product data is 100% live Shopify data via a native `collection` setting --
+  no hardcoded product names/prices/images. Colors reference the theme's
+  global color_palette directly (Horizon's own convention, confirmed via the
+  header/hero work this session -- no per-section color_scheme concept exists
+  here). Checked production's actual /shop page directly: product image
+  corners are a plain 4px radius, not anything elaborate -- used the same
+  1.5rem radius already established for the hero's photo instead.
+{% endcomment %}
+
+<section class="bfbella-shop" id="BfbellaShop-{{ section.id }}">
+  <div class="bfbella-shop__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="bfbella-shop__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <p class="bfbella-shop__subheading">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.collection != blank -%}
+      <div class="bfbella-shop__grid" style="--bfbella-shop-columns: {{ section.settings.columns_desktop }};">
+        {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
+          <div class="bfbella-shop__card">
+            <a href="{{ product.url }}" class="bfbella-shop__media">
+              {%- if product.featured_image != blank -%}
+                {{
+                  product.featured_image
+                  | image_url: width: 800
+                  | image_tag:
+                    class: 'bfbella-shop__image',
+                    loading: 'lazy',
+                    widths: '400, 600, 800',
+                    sizes: '(min-width: 990px) 30vw, 90vw'
+                }}
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'bfbella-shop__image' }}
+              {%- endif -%}
+              {%- if product.compare_at_price > product.price -%}
+                <span class="bfbella-shop__badge">Sale</span>
+              {%- endif -%}
+            </a>
+            <div class="bfbella-shop__content">
+              <a href="{{ product.url }}" class="bfbella-shop__title">{{ product.title }}</a>
+              <div class="bfbella-shop__price">
+                {%- if product.compare_at_price > product.price -%}
+                  <span class="bfbella-shop__price--sale">{{ product.price | money }}</span>
+                  <span class="bfbella-shop__price--compare">{{ product.compare_at_price | money }}</span>
+                {%- else -%}
+                  <span>{{ product.price | money }}</span>
+                {%- endif -%}
+              </div>
+
+              {%- assign current_variant = product.selected_or_first_available_variant -%}
+              <div class="bfbella-shop__form">
+                {%- form 'product', product, id: 'BfbellaShopForm-' | append: product.id, class: 'bfbella-shop__form-inner' -%}
+                  <input type="hidden" name="id" value="{{ current_variant.id }}" {% unless current_variant.available %}disabled{% endunless %}>
+                  <button
+                    type="submit"
+                    name="add"
+                    class="bfbella-shop__button bfbella-shop__button--primary"
+                    {% unless current_variant.available %}disabled{% endunless %}
+                  >
+                    {%- if current_variant.available -%}
+                      {{ 'products.product.add_to_cart' | t }}
+                    {%- else -%}
+                      {{ 'products.product.sold_out' | t }}
+                    {%- endif -%}
+                  </button>
+                {%- endform -%}
+              </div>
+              <a href="{{ product.url }}" class="bfbella-shop__button bfbella-shop__button--secondary">View details</a>
+            </div>
+          </div>
+        {%- else -%}
+          <p class="bfbella-shop__empty">No products to show yet — pick a collection above.</p>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <p class="bfbella-shop__empty">Select a collection in the section settings to show products here.</p>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  #BfbellaShop-{{ section.id }} {
+    background: {{ settings.color_palette.background }};
+    padding: 5rem 0;
+  }
+
+  #BfbellaShop-{{ section.id }} .bfbella-shop__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  #BfbellaShop-{{ section.id }} .bfbella-shop__heading {
+    font-family: var(--font-heading--family);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-size: 3.2rem;
+    color: {{ settings.color_palette.foreground }};
+    text-align: center;
+    margin: 0 0 1rem;
+  }
+
+  #BfbellaShop-{{ section.id }} .bfbella-shop__subheading {
+    text-align: center;
+    font-size: 1.6rem;
+    color: {{ settings.color_palette.foreground }}bf;
+    max-width: 60rem;
+    margin: 0 auto 3.5rem;
+  }
+
+  #BfbellaShop-{{ section.id }} .bfbella-shop__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    #BfbellaShop-{{ section.id }} .bfbella-shop__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    #BfbellaShop-{{ section.id }} .bfbella-shop__grid {
+      grid-template-columns: repeat(var(--bfbella-shop-columns, 3), 1fr);
+    }
+  }
+
+  #BfbellaShop-{{ section.id }} .bfbella-shop__card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    background: {{ settings.color_palette.foreground }}08;
+    border: 1px solid {{ settings.color_palette.foreground }}1a;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  #BfbellaShop-{{ section.id }} .bfbella-shop__card:hover {
+    transform: translateY(-0.4rem);
+    border-color: {{ settings.color_palette.color1 }}80;
+  }
+
+  #BfbellaShop-{{ section.id }} .bfbella-shop__media {
+    position: relative;
+    display: block;
+  }
+
+  #BfbellaShop-{{ section.id }} .bfbella-shop__image {
+    width: 100%;
+    height: 26rem;
+    object-fit: cover;
+    display: block;
+  }
+
+  #BfbellaShop-{{ section.id }} .bfbella-shop__badge {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    background: {{ settings.color_palette.color1 }};
+    color: {{ settings.color_palette.background }};
+    padding: 0.4rem 1.2rem;
+    border-radius: 999px;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  #BfbellaShop-{{ section.id }} .bfbella-shop__content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex-grow: 1;
+  }
+
+  #BfbellaShop-{{ section.id }} .bfbella-shop__title {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: {{ settings.color_palette.foreground }};
+    text-decoration: none;
+  }
+
+  #BfbellaShop-{{ section.id }} .bfbella-shop__title:hover {
+    color: {{ settings.color_palette.color1 }};
+  }
+
+  #BfbellaShop-{{ section.id }} .bfbella-shop__price {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: {{ settings.color_palette.foreground }};
+  }
+
+  #BfbellaShop-{{ section.id }} .bfbella-shop__price--sale {
+    color: {{ settings.color_palette.color1 }};
+  }
+
+  #BfbellaShop-{{ section.id }} .bfbella-shop__price--compare {
+    text-decoration: line-through;
+    font-weight: 400;
+    opacity: 0.6;
+    margin-left: 0.6rem;
+    font-size: 1.4rem;
+  }
+
+  #BfbellaShop-{{ section.id }} .bfbella-shop__form-inner {
+    margin: 0;
+  }
+
+  #BfbellaShop-{{ section.id }} .bfbella-shop__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.4rem;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.3s ease;
+    width: 100%;
+  }
+
+  #BfbellaShop-{{ section.id }} .bfbella-shop__button--primary {
+    background: {{ settings.color_palette.color1 }};
+    color: {{ settings.color_palette.background }};
+  }
+
+  #BfbellaShop-{{ section.id }} .bfbella-shop__button--primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  #BfbellaShop-{{ section.id }} .bfbella-shop__button--secondary {
+    background: transparent;
+    border: 1px solid {{ settings.color_palette.foreground }}40;
+    color: {{ settings.color_palette.foreground }};
+  }
+
+  #BfbellaShop-{{ section.id }} .bfbella-shop__button:hover {
+    transform: scale(1.03);
+  }
+
+  #BfbellaShop-{{ section.id }} .bfbella-shop__empty {
+    text-align: center;
+    color: {{ settings.color_palette.foreground }}99;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BFBella — Shop",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Shop our products",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 6,
+      "label": "Products to show"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3,
+      "label": "Columns on desktop"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BFBella — Shop"
+    }
+  ]
+}
+{% endschema %}
