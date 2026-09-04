@@ -1263,13 +1263,13 @@
 {% endcomment %}
 {% style %}
   #header-component {
-    background: rgba(var(--color-foreground-rgb), 0.75);
+    background: rgb(var(--color-foreground-rgb) / 0.75);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     transition: background 0.3s ease;
   }
   #header-component[data-sticky-state='active'] {
-    background: rgba(var(--color-foreground-rgb), 0.85);
+    background: rgb(var(--color-foreground-rgb) / 0.85);
   }
   #header-component :where(*) {
     --color-foreground-rgb: var(--color-background-rgb);
@@ -1291,7 +1291,7 @@
   */
   .header-actions__action:hover,
   .header__icon--menu:hover {
-    background: rgba(var(--color-background-rgb), 0.15);
+    background: rgb(var(--color-background-rgb) / 0.15);
     border-radius: 8px;
     transform: scale(1.1);
     transition: background 0.3s ease, transform 0.3s ease;
