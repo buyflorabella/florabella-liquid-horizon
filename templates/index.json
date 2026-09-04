@@ -15,12 +15,38 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<p>Browse our latest products</p>",
+            "text": "<p>Wake Up Your Soil</p>",
             "text_color": "{{ settings.color_palette.background }}",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
-            "type_preset": "h2",
+            "type_preset": "h1",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "text_bfbella_sub": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>Bio trace minerals that make every drop of fertilizer work harder.</p>",
+            "text_color": "{{ settings.color_palette.background }}",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h5",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
             "line_height": "normal",
@@ -41,8 +67,26 @@
           "type": "button",
           "name": "t:names.button",
           "settings": {
-            "label": "Shop all",
+            "label": "Shop Bio Trace Mix",
             "link": "shopify://collections/all",
+            "open_in_new_tab": false,
+            "style_class": "button-custom",
+            "custom_button_background": "rgba(0,0,0,0)",
+            "custom_button_text": "{{ settings.color_palette.background }}",
+            "custom_button_border": "{{ settings.color_palette.background }}",
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
+          },
+          "blocks": {}
+        },
+        "button_bfbella2": {
+          "type": "button",
+          "name": "t:names.button",
+          "settings": {
+            "label": "See Real Grower Results",
+            "link": "",
             "open_in_new_tab": false,
             "style_class": "button-custom",
             "custom_button_background": "rgba(0,0,0,0)",
@@ -58,7 +102,9 @@
       },
       "block_order": [
         "text_YLPk4p",
-        "button_H9gpTf"
+        "text_bfbella_sub",
+        "button_H9gpTf",
+        "button_bfbella2"
       ],
       "name": "t:names.hero",
       "settings": {
