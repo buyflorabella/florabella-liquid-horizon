@@ -1266,6 +1266,26 @@
     color: {{ settings.color_palette.color1 }};
     transform: translateY(-2px);
   }
+
+  /*
+    BFBella addition: pass-1 parity restore, round 2 (2026-09-04). DXB confirmed
+    pass-1 (the from-scratch build) "nailed it" -- ports pass-1's icon hover
+    feedback and text-fallback logo weight, which didn't carry over into the
+    copy-modify rebuild.
+  */
+  .header-actions__action:hover,
+  .header__icon--menu:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    transform: scale(1.1);
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+
+  .header-logo {
+    font-weight: 800 !important;
+    font-size: 20px !important;
+    letter-spacing: -0.02em;
+  }
 {% endstyle %}
 
 {% schema %}
